@@ -1,0 +1,41 @@
+###################
+Selenium WebDriver
+###################
+
+browser = webdriver.Chrome() - создается процесс в системе
+browser.close()              - закрывает текущее окно браузера, всплывающее окно или вкладку
+browser.quit()               - зкрывает все окна, вкладки и процессы вебдрайвера
+                               если окно закрыть руками, то останется висеть процесс, что будет жрать ОЗУ
+
+
+from selenium import webdriver
+from selenium.webdriver.common.by import By
+
+
+link = "http://suninjuly.github.io/simple_form_find_task.html"
+browser = webdriver.Chrome()
+browser.get(link)
+button = browser.find_element(By.ID, "submit_button")
+button.click()
+
+# закрываем браузер после всех манипуляций
+browser.quit()
+
+
+===================
+конструкция try/finally поможет гарантированно завершить все процессы тестовой сессии
+
+from selenium import webdriver
+from selenium.webdriver.common.by import By
+
+link = "http://suninjuly.github.io/simple_form_find_task.html"
+
+try:
+    browser = webdriver.Chrome()
+    browser.get(link)
+    button = browser.find_element(By.ID, "submit_button")
+    button.click()
+
+finally:
+    # закрываем браузер после всех манипуляций
+    browser.quit()

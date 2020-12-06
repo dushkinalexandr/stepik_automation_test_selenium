@@ -1,0 +1,39 @@
+###################
+Метод execute_script
+###################
+
+С помощью метода execute_script можно выполнить программу, написанную на языке JavaScript, как часть сценария автотеста в запущенном браузере.
+
+from selenium import webdriver
+browser = webdriver.Chrome()
+
+# вызовем alert
+browser.execute_script("alert('Robots at work');")
+
+# изменим заголовок страницы
+browser.execute_script("document.title='Script executing';")
+
+# выполнить сразу несколько инструкций, перечислив их через точку с запятой
+browser.execute_script("document.title='Script executing';alert('Robots at work');")
+
+
+###################
+JavaScript
+###################
+Выполнение JavaScript на странице - это неописанный в документации Selenium способ поиска элемента.
+Вместо встроенных find_element_by... можно использовать вот такую конструкцию:
+element = browser.execute_script('document.getElementsByName("name")')
+
+Так же есть конструкции:
+getElementById
+getElementsByTagName
+getElementsByClassName
+querySelector - для CSS
+querySelectorAll - для CSS (находит все совпадения)
+
+evaluate - для XPATH.
+
+===================
+библиотека jquery
+===================
+$('#element-id') найдет вам нужный элемент
